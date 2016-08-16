@@ -7,19 +7,19 @@
   <div id="main">
     <div id="content">
       {{ content | expand_urls: root_url }}
-    </div>
-  </div>
+	  {% unless page.sidebar == false %}
+  	  <aside class="sidebar">
+  	    {% if site.page_asides.size %}
+  	      {% include_array page_asides %}
+  	    {% else %}
+  	      {% include_array default_asides %}
+  	    {% endif %}
+  	  </aside>
+  	  {% endunless %}
+  	    </div>
+  	  </div>
   <!-- <footer role="contentinfo">{% include footer.html %}</footer> -->
   {% include after_footer.html %}
-  {% unless page.sidebar == false %}
-  <aside class="sidebar">
-    {% if site.page_asides.size %}
-      {% include_array page_asides %}
-    {% else %}
-      {% include_array default_asides %}
-    {% endif %}
-  </aside>
-  {% endunless %}
 </body>
 
 
