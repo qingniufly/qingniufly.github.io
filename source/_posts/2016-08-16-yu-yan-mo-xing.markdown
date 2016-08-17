@@ -3,7 +3,7 @@ layout: post
 title: "语言模型"
 date: 2016-08-16 21:59:51 +0800
 comments: true
-categories: 
+categories: nlp
 ---
 ### 语言模型
 	val idx = List(1, 2, 3, 4)
