@@ -132,6 +132,61 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2017-03-31-HBase-deploy-mode" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/31/2017-03-31-HBase-deploy-mode/">HBase部署方式</a>
+    </h1>
+  
+
+        <a href="/2017/03/31/2017-03-31-HBase-deploy-mode/" class="archive-article-date">
+  	<time datetime="2017-03-31T05:48:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-31</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Standalone-Mode"><a href="#Standalone-Mode" class="headerlink" title="Standalone Mode"></a>Standalone Mode</h2><p>单节点独立部署</p>
+<h3 id="1-下载并解压HBase安装包"><a href="#1-下载并解压HBase安装包" class="headerlink" title="1. 下载并解压HBase安装包"></a>1. 下载并解压HBase安装包</h3><h3 id="2-在hbase-env-sh中配置JAVA-HOME"><a href="#2-在hbase-env-sh中配置JAVA-HOME" class="headerlink" title="2. 在hbase-env.sh中配置JAVA_HOME"></a>2. 在hbase-env.sh中配置JAVA_HOME</h3><h3 id="3-编辑hbase-site-xml，配置hbase-rootdir和hbase-zookeeper-property-dataDir"><a href="#3-编辑hbase-site-xml，配置hbase-rootdir和hbase-zookeeper-property-dataDir" class="headerlink" title="3. 编辑hbase-site.xml，配置hbase.rootdir和hbase.zookeeper.property.dataDir"></a>3. 编辑hbase-site.xml，配置hbase.rootdir和hbase.zookeeper.property.dataDir</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">  &lt;property&gt;</div><div class="line">    &lt;name&gt;hbase.rootdir&lt;/name&gt;</div><div class="line">    &lt;value&gt;file:///home/testuser/hbase&lt;/value&gt;</div><div class="line">  &lt;/property&gt;</div><div class="line">  &lt;property&gt;</div><div class="line">    &lt;name&gt;hbase.zookeeper.property.dataDir&lt;/name&gt;</div><div class="line">    &lt;value&gt;/home/testuser/zookeeper&lt;/value&gt;</div><div class="line">  &lt;/property&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+        <a class="article-more-a"  href="/2017/03/31/2017-03-31-HBase-deploy-mode/#more">更多 >></a>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HBase-Standalone-Mode-Distributed-Mode/">HBase,Standalone Mode, Distributed Mode</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/31/2017-03-31-HBase-deploy-mode/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-2016-12-07-cnn-in-nlp" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -360,7 +415,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2016 Qingniu Fly
+    		&copy; 2017 Qingniu Fly
     	</div>
 		<div class="footer-center">
 			<span id="busuanzi_container_site_pv">
@@ -430,6 +485,10 @@ MathJax.Hub.Queue(function() {
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">HBase,Standalone Mode, Distributed Mode</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
