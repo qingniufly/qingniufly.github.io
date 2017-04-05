@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>python函数 | Hexo</title>
+  <title>Maven-Mirrors | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="常用Python函数介绍">
+  <meta name="description" content="1. settings配置现状在项目中遇到Maven的settings.xml配置错误，导致所有的repository都通过Mirror来下载结果一些第三方的repository里面的artifact下载失败。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python函数">
-<meta property="og:url" content="http://yoursite.com/2016/08/17/pythonhan-shu/index.html">
+<meta property="og:title" content="Maven-Mirrors">
+<meta property="og:url" content="http://yoursite.com/2017/04/05/Maven-Mirrors/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="常用Python函数介绍">
-<meta property="og:updated_time" content="2016-12-08T06:47:36.000Z">
+<meta property="og:description" content="1. settings配置现状在项目中遇到Maven的settings.xml配置错误，导致所有的repository都通过Mirror来下载结果一些第三方的repository里面的artifact下载失败。">
+<meta property="og:updated_time" content="2017-04-05T06:13:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python函数">
-<meta name="twitter:description" content="常用Python函数介绍">
+<meta name="twitter:title" content="Maven-Mirrors">
+<meta name="twitter:description" content="1. settings配置现状在项目中遇到Maven的settings.xml配置错误，导致所有的repository都通过Mirror来下载结果一些第三方的repository里面的artifact下载失败。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -134,26 +134,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-pythonhan-shu" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Maven-Mirrors" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      python函数
+      Maven-Mirrors
     </h1>
   
 
-        <a href="/2016/08/17/pythonhan-shu/" class="archive-article-date">
-  	<time datetime="2016-08-16T16:29:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-17</time>
+        <a href="/2017/04/05/Maven-Mirrors/" class="archive-article-date">
+  	<time datetime="2017-04-05T06:12:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-05</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="常用Python函数介绍"><a href="#常用Python函数介绍" class="headerlink" title="常用Python函数介绍"></a>常用Python函数介绍</h3><a id="more"></a>
-<p>字符串函数</p>
+        <h2 id="1-settings配置现状"><a href="#1-settings配置现状" class="headerlink" title="1. settings配置现状"></a>1. settings配置现状</h2><p>在项目中遇到Maven的settings.xml配置错误，导致所有的repository都通过Mirror来下载<br>结果一些第三方的repository里面的artifact下载失败。</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;mirrors&gt;</div><div class="line">  &lt;mirror&gt;</div><div class="line">    &lt;id&gt;aliyun&lt;/id&gt;</div><div class="line">    &lt;name&gt;AliYun Mirror&lt;/name&gt;</div><div class="line">    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;</div><div class="line">    &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;</div><div class="line">  &lt;/mirror&gt;</div><div class="line">&lt;/mirrors&gt;</div></pre></td></tr></table></figure>
+<p>以上配置中，mirrorOf配置为<code>*</code>指定了所有的repositories都通过阿里云的Maven镜像来下载</p>
+<h2 id="2-错误现象"><a href="#2-错误现象" class="headerlink" title="2. 错误现象"></a>2. 错误现象</h2><p>在对parquet-mr项目进行构建时，parquet-cascading子项目的pom中定义了一个repository如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;repositories&gt;</div><div class="line">  &lt;repository&gt;</div><div class="line">   &lt;id&gt;conjars.org&lt;/id&gt;</div><div class="line">    &lt;url&gt;http://conjars.org/repo&lt;/url&gt;</div><div class="line">  &lt;/repository&gt;</div><div class="line">&lt;/repositories&gt;</div></pre></td></tr></table></figure></p>
+<p>使用1中配置的mirror，这个repository也会被AliYun的镜像进行处理，导致下载cascading相关的依赖失败。</p>
+<h2 id="3-配置修正"><a href="#3-配置修正" class="headerlink" title="3. 配置修正"></a>3. 配置修正</h2><p>将mirrorOf配置的值 由 <code>*</code> 改为 <code>*,!conjars.org</code></p>
 
       
 
@@ -193,12 +198,12 @@
     <div class="article-info article-info-index">
       
       
-      
-	<div class="article-category tagcloud">
-	<i class="icon-book icon"></i>
-	<a class="article-category-link" href="/categories/python/">python</a>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven-Repository-Mirror/">Maven, Repository, Mirror</a></li></ul>
 	</div>
 
+      
 
       
 
@@ -248,7 +253,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2016/08/17/pythonhan-shu/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/05/Maven-Mirrors/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -262,18 +267,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/08/17/linuxfu-wu-qi-gong-ju/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Linux服务器工具
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/16/yu-yan-mo-xing/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">语言模型</div>
+    <a href="/2017/03/31/HBase-deploy-mode/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HBase部署方式</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -286,7 +282,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="pythonhan-shu" data-title="python函数" data-url="http://yoursite.com/2016/08/17/pythonhan-shu/"></div>
+	<div class="ds-thread" data-thread-key="Maven-Mirrors" data-title="Maven-Mirrors" data-url="http://yoursite.com/2017/04/05/Maven-Mirrors/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
