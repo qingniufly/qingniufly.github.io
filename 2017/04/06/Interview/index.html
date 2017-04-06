@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>语言模型 | Hexo</title>
+  <title>面试问题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="语言模型val idx = List(1, 2, 3, 4)">
+  <meta name="description" content="1. ArrayList与LinkedListArrayList基于数据实现，随机查找方便。默认容量是10，ArrayList与Vector基本一致，除了ArrayList不是线程安全的。扩容算法，每次增长为原来的1.5倍
+LinkedList基于链表实现，顺序查找方便。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="语言模型">
-<meta property="og:url" content="http://yoursite.com/2016/08/16/yu-yan-mo-xing/index.html">
+<meta property="og:title" content="面试问题">
+<meta property="og:url" content="http://yoursite.com/2017/04/06/Interview/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="语言模型val idx = List(1, 2, 3, 4)">
-<meta property="og:updated_time" content="2016-12-08T06:47:36.000Z">
+<meta property="og:description" content="1. ArrayList与LinkedListArrayList基于数据实现，随机查找方便。默认容量是10，ArrayList与Vector基本一致，除了ArrayList不是线程安全的。扩容算法，每次增长为原来的1.5倍
+LinkedList基于链表实现，顺序查找方便。">
+<meta property="og:updated_time" content="2017-04-06T03:01:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="语言模型">
-<meta name="twitter:description" content="语言模型val idx = List(1, 2, 3, 4)">
+<meta name="twitter:title" content="面试问题">
+<meta name="twitter:description" content="1. ArrayList与LinkedListArrayList基于数据实现，随机查找方便。默认容量是10，ArrayList与Vector基本一致，除了ArrayList不是线程安全的。扩容算法，每次增长为原来的1.5倍
+LinkedList基于链表实现，顺序查找方便。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -134,28 +137,53 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-yu-yan-mo-xing" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Interview" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      语言模型
+      面试问题
     </h1>
   
 
-        <a href="/2016/08/16/yu-yan-mo-xing/" class="archive-article-date">
-  	<time datetime="2016-08-16T13:59:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-16</time>
+        <a href="/2017/04/06/Interview/" class="archive-article-date">
+  	<time datetime="2017-04-06T02:52:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-06</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="语言模型"><a href="#语言模型" class="headerlink" title="语言模型"></a>语言模型</h3><pre><code>val idx = List(1, 2, 3, 4)
-</code></pre><a id="more"></a>
-<p>上面是一个scala的常量定义</p>
-<h3 id="测试公式"><a href="#测试公式" class="headerlink" title="测试公式"></a>测试公式</h3><p>$$<br>f’\left( x\right) = \lim _{x\rightarrow 0}\dfrac {f\left( x+\Delta x\right) - f\left( x\right)}{\Delta x}<br>$$</p>
+        <h2 id="1-ArrayList与LinkedList"><a href="#1-ArrayList与LinkedList" class="headerlink" title="1. ArrayList与LinkedList"></a>1. ArrayList与LinkedList</h2><p>ArrayList基于数据实现，随机查找方便。默认容量是10，<br>ArrayList与Vector基本一致，除了ArrayList不是线程安全的。<br>扩容算法，每次增长为原来的1.5倍</p>
+<p>LinkedList基于链表实现，顺序查找方便。</p>
+<a id="more"></a>
+<h2 id="2-HashMap实现"><a href="#2-HashMap实现" class="headerlink" title="2. HashMap实现"></a>2. HashMap实现</h2><p>内部基于数组实现，数组的每一项为Map.Entry,相同hash值的key，位于数组相同的索引上，Map.Entry维护一个相同hash的冲突链表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">transient Entry[] table;</div><div class="line">static final int DEFAULT_INITIAL_CAPACITY = 16;</div><div class="line">static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;</div><div class="line">static final float DEFAULT_LOAD_FACTOR = 0.75f;</div></pre></td></tr></table></figure></p>
+<p>扩容算法<br>默认加载因子是0.75, 当HashMap的数据个数 &gt;= 容量 * 加载因子时， 会进行扩容，新的容量是原来的两倍</p>
+<h2 id="3-ConcurrentHashMap实现"><a href="#3-ConcurrentHashMap实现" class="headerlink" title="3. ConcurrentHashMap实现"></a>3. ConcurrentHashMap实现</h2><p>如何处理并发<br>通过分段锁来实现，内部维护了Segment数组，Segment实现了ReentrantLock,通过分段加锁来实现并发控制。<br>resize时，对需要resize的Segment进行resize。</p>
+<h2 id="4-线程池"><a href="#4-线程池" class="headerlink" title="4. 线程池"></a>4. 线程池</h2><p>使用ThreadPoolExecutor来创建线程池<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepaliveTime, millseconds, runnableTaskQueue, handle);</div></pre></td></tr></table></figure></p>
+<p>corePoolSize 线程池的基本大小。<br>当提交一个任务到线程池的时候，线程池会创建一个线程来执行任务，<br>即使其他空闲线程能够执行新任务，也会创建线程。<br>等到需要执行的任务数超过线程池基本大小时，就不在创建。<br>如果调用了线程池的prestartAllCoreThreads方法，线程池会提前创建并启动所有基本线程。</p>
+<p>线程池使用了什么样的队列<br>runnableTaskQueue（任务队列）：用于保存等待执行任务的阻塞队列。可选以下几个：<br>ArrayBlockingQueue，基于数组的有界阻塞队列，此队列按照FIFO（先进先出）原则对元素进行排序。<br>LinkedBlockingQueue，基于链表的阻塞队列，此队列按照FIFO（先进先出）原则对元素进行排序，吞吐量高于ArrayBlockingQueue，<br>静态工厂方法Executors.newFixedThreadPool()使用了这个队列<br>SynchronousQueue，不存储元素的阻塞队列，每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态。<br>吞吐量通常高于LinkedBlockingQueue，静态工厂方法Executors.newCachedThreadPool()使用了这个队列。<br>PriorityBlockingQueue，具有优先级的阻塞队列。</p>
+<p>maximumPoolSize：线程池的最大线程个数。如果队列满了，并且已经创建的线程个数小于最大线程数，则线程池会继续创建新的线程来执行任务。<br>如果使用了无界的任务队列，此参数失效。</p>
+<p>ThreadFactory：用于设置创建线程的工厂，可以通过线程工厂给每个创建出来的线程设置更有意义的名字。</p>
+<p>RejectExecutionHandler： 饱和策略，当队列和线程池都满了，说明线程池处于饱和状态。必须采取一种策略处理新提交的任务。<br>默认情况下是AbortPolicy，表示无法处理新任务时，抛出异常。<br>AbortPolicy：直接跑出异常<br>CallerRunsPolicy：只用调用者线程来运行任务<br>DiscardOldestPolicy：丢弃队列里的最近一个任务，并执行当前任务<br>DiscardPolicy：不处理，丢弃掉。</p>
+<p>KeepAliveTime：线程保持活动时间，线程池的工作线程空闲后，保持存活的时间。<br>如果任务很多，每个任务执行的时间比较短，可以调大这个值，提高线程利用率。</p>
+<p>TimeUnit：线程保持活动时间的单位，</p>
+<p>图片地址(<a href="http://cdn.infoqstatic.com/statics_s1_20170314-0434/resource/articles/java-threadPool/zh/resources/threadpool.jpg" target="_blank" rel="external">http://cdn.infoqstatic.com/statics_s1_20170314-0434/resource/articles/java-threadPool/zh/resources/threadpool.jpg</a>)<br>当提交一个新任务到线程池时，线程池的处理流程如下：</p>
+<ol>
+<li>首先线程池判断基本线程池是否已满？没满，创建一个工作线程来执行任务。满了，则进入下个流程。</li>
+<li>其次线程池判断工作队列是否已满？没满，则将新提交的任务存储在工作队列里。满了，则进入下个流程。</li>
+<li>最后线程池判断整个线程池是否已满？没满，则创建一个新的工作线程来执行任务，满了，则交给饱和策略来处理这个任务。</li>
+</ol>
+<p>线程池的execute方法接受Runnable类的实例，方法没有返回值。<br>submit方法提交任务，会返回一个Future，可以通过这个Future来判断任务是否执行成功。<br>通过Future的get方法获取返回值，get方法会阻塞直到任务完成，<br>而使用get(long timeout, TimeUnit unit)方法则会阻塞一段时间后返回，这时任务可能没有执行完。</p>
+<h2 id="5-Java内存分代管理"><a href="#5-Java内存分代管理" class="headerlink" title="5. Java内存分代管理"></a>5. Java内存分代管理</h2><p>JVM堆分为新生代和老年代<br>新生代又分为Eden区和survivor区，survivor又分为from survivor和to survivor，默认比例为8：1：1<br>新生代垃圾收集器：<br>Serial、ParNew、Parallel </p>
+<p>Java虚拟机栈描述的是Java方法执行的内存模型</p>
+<p>对象分配可能在哪个区域？<br>堆，</p>
+<p>方法区存放：<br>已经被JVM加载的类信息，常量，静态变量等数据。<br>存放了已加载的类的信息(如类名，修饰符)、类中的静态变量、final定义的常量、类中的field、方法信息，<br>当开发人员调用类对象中的getName、isInterface等方法来获取信息时，这些数据都来源于方法区。<br>方法区是全局共享的，在一定条件下它也会被GC。当方法区使用的内存超过它允许的大小时，就会抛出OutOfMemory：PermGen Space异常。</p>
+<p>.class文件在哪个区存放？<br>方法区存放</p>
+<p>栈存放哪些数据？<br>函数中定义的基本类型变量和对象的引用变量</p>
+<h2 id="6-NIO"><a href="#6-NIO" class="headerlink" title="6. NIO"></a>6. NIO</h2><p>Java NIO和IO的主要区别<br>|IO|NIO|<br>|—|—|<br>|面向流|面向缓冲|<br>|阻塞IO|非阻塞IO|<br>|无|选择器|</p>
+<p>面向流和面向缓冲<br>IO是面向流的，每次丛流中读取一个字节或几个字节，直到读取到所有字节。他们没有被缓冲在任何地方，不能前后移动流中的数据。<br>如果需要前后移动从流中读取的数据，需要先把它们缓存在一个缓冲区。<br>NIO的缓冲导向方法有所不同，数据读取到一个稍后处理的缓冲区，需要时，可以在缓冲区中前后移动，增加了处理的灵活性。<br>但是需要检查缓冲区是否包含需要处理的数据。而且要保证更多数据读入到缓冲区的时候，不能覆盖缓冲区里面尚未处理的数据。</p>
 
       
 
@@ -195,12 +223,12 @@
     <div class="article-info article-info-index">
       
       
-      
-	<div class="article-category tagcloud">
-	<i class="icon-book icon"></i>
-	<a class="article-category-link" href="/categories/nlp/">nlp</a>
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Interview-Java-Core/">Interview,Java Core</a></li></ul>
 	</div>
 
+      
 
       
 
@@ -250,7 +278,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2016/08/16/yu-yan-mo-xing/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/06/Interview/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -264,15 +292,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/08/17/pythonhan-shu/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          python函数
-        
-      </div>
-    </a>
   
+    <a href="/2017/04/05/Maven-Mirrors/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Maven中的Mirrors配置</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -283,7 +307,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="yu-yan-mo-xing" data-title="语言模型" data-url="http://yoursite.com/2016/08/16/yu-yan-mo-xing/"></div>
+	<div class="ds-thread" data-thread-key="Interview" data-title="面试问题" data-url="http://yoursite.com/2017/04/06/Interview/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
